@@ -5,14 +5,11 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@400;500;600;700;800&display=swap');
 
 @layer base {
-    * {
-        @apply border-border;
-    }
-
     body {
         @apply bg-white text-gray-900 font-sans;
     }
 }
+
 
 @layer components {
     .btn {
