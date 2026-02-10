@@ -21,7 +21,7 @@ export default function Footer() {
                         </p>
                         <div className="flex gap-3">
                             <a
-                                href="https://facebook.com"
+                                href="https://www.facebook.com/profile.php?id=61571046990395"
                                 target="_blank"
                                 rel="noopener noreferrer"
                                 className="p-2 bg-white/10 hover:bg-primary rounded-lg transition-colors"
@@ -30,22 +30,13 @@ export default function Footer() {
                                 <Facebook className="w-5 h-5" />
                             </a>
                             <a
-                                href="https://instagram.com"
+                                href="https://www.instagram.com/weekend.camps"
                                 target="_blank"
                                 rel="noopener noreferrer"
                                 className="p-2 bg-white/10 hover:bg-primary rounded-lg transition-colors"
                                 aria-label="Instagram"
                             >
                                 <Instagram className="w-5 h-5" />
-                            </a>
-                            <a
-                                href="https://twitter.com"
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                className="p-2 bg-white/10 hover:bg-primary rounded-lg transition-colors"
-                                aria-label="Twitter"
-                            >
-                                <Twitter className="w-5 h-5" />
                             </a>
                         </div>
                     </div>
@@ -114,8 +105,8 @@ export default function Footer() {
                         <ul className="space-y-3">
                             <li className="flex items-start gap-2 text-gray-400">
                                 <Mail className="w-5 h-5 mt-0.5 flex-shrink-0 text-primary" />
-                                <a href="mailto:admin@weekendcamps.com" className="hover:text-primary transition-colors">
-                                    admin@weekendcamps.com
+                                <a href="mailto:dabhadetejas165@gmail.com" className="hover:text-primary transition-colors">
+                                    dabhadetejas165@gmail.com
                                 </a>
                             </li>
                             <li className="flex items-start gap-2 text-gray-400">
