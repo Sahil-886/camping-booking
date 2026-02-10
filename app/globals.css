@@ -6,10 +6,9 @@
 
 @layer base {
     body {
-        @apply bg-white text-gray-900 font-sans;
+        font-family: 'Inter', sans-serif;
     }
 }
-
 
 @layer components {
     .btn {
