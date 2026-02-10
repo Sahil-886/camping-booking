@@ -1,34 +1,37 @@
 import nodemailer from 'nodemailer';
 
-const transporter = nodemailer.createTransporter({
-    host: process.env.SMTP_HOST,
+function getTransporter() {
+  return nodemailer.createTransport({
+    host: process.env.SMTP_HOST || 'smtp.gmail.com',
     port: parseInt(process.env.SMTP_PORT || '587'),
     secure: false,
     auth: {
-        user: process.env.SMTP_USER,
-        pass: process.env.SMTP_PASS,
+      user: process.env.SMTP_USER,
+      pass: process.env.SMTP_PASS,
     },
-});
+  });
+}
+
 
 export interface BookingEmailData {
-    bookingId: string;
-    customerName: string;
-    customerEmail: string;
-    campTitle: string;
-    bookingDate: string;
-    adults: number;
-    children: number;
-    totalAmount: number;
+  bookingId: string;
+  customerName: string;
+  customerEmail: string;
+  campTitle: string;
+  bookingDate: string;
+  adults: number;
+  children: number;
+  totalAmount: number;
 }
 
 export async function sendBookingConfirmation(data: BookingEmailData) {
-    const { bookingId, customerName, customerEmail, campTitle, bookingDate, adults, children, totalAmount } = data;
+  const { bookingId, customerName, customerEmail, campTitle, bookingDate, adults, children, totalAmount } = data;
 
-    const mailOptions = {
-        from: process.env.SMTP_USER,
-        to: customerEmail,
-        subject: `Booking Confirmation - ${bookingId}`,
-        html: `
+  const mailOptions = {
+    from: process.env.SMTP_USER,
+    to: customerEmail,
+    subject: `Booking Confirmation - ${bookingId}`,
+    html: `
       <!DOCTYPE html>
       <html>
       <head>
@@ -105,19 +108,19 @@ export async function sendBookingConfirmation(data: BookingEmailData) {
       </body>
       </html>
     `,
-    };
+  };
 
-    await transporter.sendMail(mailOptions);
+  await getTransporter().sendMail(mailOptions);
 }
 
 export async function sendAdminNotification(data: BookingEmailData) {
-    const { bookingId, customerName, customerEmail, campTitle, bookingDate, adults, children, totalAmount } = data;
+  const { bookingId, customerName, customerEmail, campTitle, bookingDate, adults, children, totalAmount } = data;
 
-    const mailOptions = {
-        from: process.env.SMTP_USER,
-        to: process.env.ADMIN_EMAIL,
-        subject: `New Booking Received - ${bookingId}`,
-        html: `
+  const mailOptions = {
+    from: process.env.SMTP_USER,
+    to: process.env.ADMIN_EMAIL,
+    subject: `New Booking Received - ${bookingId}`,
+    html: `
       <h2>New Booking Received</h2>
       <p><strong>Booking ID:</strong> ${bookingId}</p>
       <p><strong>Customer:</strong> ${customerName} (${customerEmail})</p>
@@ -127,17 +130,17 @@ export async function sendAdminNotification(data: BookingEmailData) {
       <p><strong>Total Amount:</strong> ₹${totalAmount}</p>
       <p><a href="${process.env.NEXTAUTH_URL}/admin/bookings">View in Admin Panel</a></p>
     `,
-    };
+  };
 
-    await transporter.sendMail(mailOptions);
+  await getTransporter().sendMail(mailOptions);
 }
 
 export async function sendContactNotification(name: string, email: string, subject: string, message: string) {
-    const mailOptions = {
-        from: process.env.SMTP_USER,
-        to: process.env.ADMIN_EMAIL,
-        subject: `New Contact Inquiry: ${subject}`,
-        html: `
+  const mailOptions = {
+    from: process.env.SMTP_USER,
+    to: process.env.ADMIN_EMAIL,
+    subject: `New Contact Inquiry: ${subject}`,
+    html: `
       <h2>New Contact Form Submission</h2>
       <p><strong>Name:</strong> ${name}</p>
       <p><strong>Email:</strong> ${email}</p>
@@ -145,7 +148,7 @@ export async function sendContactNotification(name: string, email: string, subje
       <p><strong>Message:</strong></p>
       <p>${message}</p>
     `,
-    };
+  };
 
-    await transporter.sendMail(mailOptions);
+  await getTransporter().sendMail(mailOptions);
 }
