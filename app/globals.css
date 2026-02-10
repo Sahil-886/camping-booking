@@ -20,15 +20,15 @@
     }
 
     .btn-primary {
-        @apply bg-primary-600 text-white hover:bg-primary-700 active:scale-95;
+        @apply bg-gradient-to-r from-primary to-secondary text-white hover:opacity-90 active:scale-95 shadow-lg;
     }
 
     .btn-secondary {
-        @apply bg-accent-orange text-white hover:bg-orange-600 active:scale-95;
+        @apply bg-accent text-white hover:opacity-90 active:scale-95;
     }
 
     .btn-outline {
-        @apply border-2 border-primary-600 text-primary-600 hover:bg-primary-50 active:scale-95;
+        @apply border-2 border-primary text-primary hover:bg-primary hover:text-white active:scale-95;
     }
 
     .card {
@@ -36,7 +36,7 @@
     }
 
     .input {
-        @apply w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:border-primary-500 focus:ring-2 focus:ring-primary-200 outline-none transition-all;
+        @apply w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none transition-all;
     }
 
     .label {
