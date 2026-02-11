@@ -59,10 +59,20 @@ async function seed() {
             role: String,
         }, { timestamps: true }));
 
+        const Review = mongoose.model('Review', new mongoose.Schema({
+            camp: { type: mongoose.Schema.Types.ObjectId, ref: 'Camp' },
+            customerName: String,
+            email: String,
+            rating: Number,
+            comment: String,
+            approved: Boolean,
+        }, { timestamps: true }));
+
         // Clear existing data
         await Camp.deleteMany({});
         await Blog.deleteMany({});
         await User.deleteMany({});
+        await Review.deleteMany({});
         console.log('✅ Cleared existing data');
 
         // Create camps
@@ -205,6 +215,88 @@ async function seed() {
         ]);
 
         console.log(`✅ Created ${blogs.length} blog posts`);
+
+        // Create demo reviews
+        const reviews = await Review.insertMany([
+            // Pawna Lake Reviews
+            {
+                camp: camps[0]._id,
+                customerName: 'Rahul Sharma',
+                email: 'rahul.s@example.com',
+                rating: 5,
+                comment: 'Amazing experience! The lakeside view was breathtaking. Staff was very helpful and food was delicious. Highly recommended for couples and families.',
+                approved: true,
+            },
+            {
+                camp: camps[0]._id,
+                customerName: 'Priya Patel',
+                email: 'priya.p@example.com',
+                rating: 5,
+                comment: 'Best weekend getaway! The bonfire night was magical. Clean tents, good food, and beautiful sunrise. Will definitely come back!',
+                approved: true,
+            },
+            {
+                camp: camps[0]._id,
+                customerName: 'Amit Kumar',
+                email: 'amit.k@example.com',
+                rating: 4,
+                comment: 'Great place for camping. The location is perfect and activities were fun. Only suggestion is to add more vegetarian options in BBQ.',
+                approved: true,
+            },
+            // Lonavala Hill Reviews
+            {
+                camp: camps[1]._id,
+                customerName: 'Sneha Desai',
+                email: 'sneha.d@example.com',
+                rating: 5,
+                comment: 'Absolutely loved the hilltop camping! The trek was easy and the view from top was stunning. Perfect for adventure lovers.',
+                approved: true,
+            },
+            {
+                camp: camps[1]._id,
+                customerName: 'Vikram Singh',
+                email: 'vikram.s@example.com',
+                rating: 5,
+                comment: 'One of the best camping experiences! The sunrise trek was worth waking up early. Staff was professional and safety measures were top-notch.',
+                approved: true,
+            },
+            {
+                camp: camps[1]._id,
+                customerName: 'Neha Joshi',
+                email: 'neha.j@example.com',
+                rating: 4,
+                comment: 'Beautiful location with amazing views. The bonfire and music made it even better. Great for groups and corporate outings.',
+                approved: true,
+            },
+            // Riverside Reviews
+            {
+                camp: camps[2]._id,
+                customerName: 'Rohan Mehta',
+                email: 'rohan.m@example.com',
+                rating: 5,
+                comment: 'Thrilling experience! Kayaking and rafting were so much fun. Instructors were experienced and made us feel safe. Must try!',
+                approved: true,
+            },
+            {
+                camp: camps[2]._id,
+                customerName: 'Anjali Reddy',
+                email: 'anjali.r@example.com',
+                rating: 5,
+                comment: 'Perfect adventure camping! The river activities were exciting and well-organized. Food was great and staff was friendly. Loved it!',
+                approved: true,
+            },
+            {
+                camp: camps[2]._id,
+                customerName: 'Karan Verma',
+                email: 'karan.v@example.com',
+                rating: 5,
+                comment: 'Best camping for adventure seekers! The rafting was exhilarating. Great team, great location, great memories. 10/10 would recommend!',
+                approved: true,
+            },
+        ]);
+
+        console.log(`✅ Created ${reviews.length} reviews`);
+
 
         // Create admin user (with bcrypt)
         const bcrypt = require('bcryptjs');
