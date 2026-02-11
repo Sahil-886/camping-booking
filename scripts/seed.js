@@ -1,7 +1,8 @@
 const mongoose = require('mongoose');
+require('dotenv').config({ path: '.env.local' });
 
 // MongoDB URI from environment
-const MONGODB_URI = process.env.MONGODB_URI || 'mongodb://localhost:27017/camping-booking';
+const MONGODB_URI = process.env.MONGODB_URI;
 
 if (!MONGODB_URI || MONGODB_URI.includes('your-mongodb-uri-here')) {
     console.error('\n❌ ERROR: Please configure MONGODB_URI in .env.local');
